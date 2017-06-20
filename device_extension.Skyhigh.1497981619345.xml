@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:device-extension xmlns:ns2="event_parsing/device_extension">
+    <pattern id="allEventNames">(.*)</pattern>
+    <pattern id="EVENT1">\|cat=(.*?)\|dst</pattern>
+    <pattern id="EVENT2">anomalyType=(.*?)\suserAction=</pattern>
+    <pattern id="EventCategory">activityName=(\w+)</pattern>
+    <pattern id="UNAME">userId\={\d+}</pattern>
+    <pattern id="HOST1">destinationHost=(.*?) userGroup</pattern>
+    <pattern id="time">anomaly.timecreated=(\d{4}\-\d{2}\-\d{2} \d{2}\:\d{2}\:\d{2}\&quot;</pattern>
+    <match-group description="Log Source Extension" order="1">
+        <matcher order="1" capture-group="1" pattern-id="EVENT1" field="EventName"/>
+        <matcher order="1" capture-group="1" pattern-id="SRC" field="SourceIp"/>
+        <matcher ext-data="YYYY-dd-MM hh:mm:ss" order="1" capture-group="1" pattern-id="time" field="DeviceTime"/>
+        <matcher order="1" enable-substitutions="false" capture-group="1" pattern-id="HOST1" field="HostName"/>
+        <event-match-multiple device-event-category="unknown" capture-group-index="1" pattern-id="allEventNames"/>
+    </match-group>
+</ns2:device-extension>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:device-extension xmlns:ns2="event_parsing/device_extension">
+    <pattern id="EventName-Pattern-1">^([\w\-]+)</pattern>
+    <match-group device-type-id-override="4005" order="1">
+        <matcher order="1" enable-substitutions="true" capture-group="\1" pattern-id="EventName-Pattern-1" field="EventName"/>
+        <event-match-multiple force-qidmap-lookup-on-fixup="true" send-identity="UseDSMResults" pattern-id="EventName-Pattern-1"/>
+    </match-group>
+</ns2:device-extension>

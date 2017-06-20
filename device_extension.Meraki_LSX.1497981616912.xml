@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:device-extension xmlns:ns2="event_parsing/device_extension">
+    <pattern id="allEventNames">(.*)</pattern>
+    <pattern id="EventName">(flows|urls|events|airmarshal_events)</pattern>
+    <pattern id="SRC-Meraki">src=(\d{1,3}\.\d{1,3}\.\d{1,3}.\d{1,3})</pattern>
+    <pattern id="DST-Meraki">dst=(\d{1,3}\.\d{1,3}\.\d{1,3}.\d{1,3})</pattern>
+    <pattern id="DSTP-Meraki">dport=(\d{1,5})</pattern>
+    <pattern id="SRCP-Meraki">sport=(\d{1,5})</pattern>
+    <pattern id="MAC-Meraki">(([0-9A-Fa-f]{2}[-:]){5}[0-9A-Fa-f]{2})|(([0-9A-Fa-f]{4}\.){2}[0-9A-Fa-f]{4})</pattern>
+    <pattern id="URL-Meraki">((http|https|ftp)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$)</pattern>
+    <match-group description="Meraki-Wireless-LSX" order="1">
+        <matcher order="1" enable-substitutions="false" capture-group="1" pattern-id="EventName" field="EventName"/>
+        <matcher order="1" capture-group="1" pattern-id="SRC-Meraki" field="SourceIp"/>
+        <matcher order="1" capture-group="1" pattern-id="MAC-Meraki" field="SourceMAC"/>
+        <matcher order="1" capture-group="1" pattern-id="DST-Meraki" field="DestinationIp"/>
+        <matcher order="1" capture-group="1" pattern-id="URL-Meraki" field="UserName"/>
+        <matcher order="1" capture-group="1" pattern-id="DSTP-Meraki" field="DestinationPort"/>
+        <matcher order="1" capture-group="1" pattern-id="SRCP-Meraki" field="SourcePort"/>
+        <event-match-multiple device-event-category="Meraki-Events" capture-group-index="1" pattern-id="allEventNames"/>
+    </match-group>
+</ns2:device-extension>

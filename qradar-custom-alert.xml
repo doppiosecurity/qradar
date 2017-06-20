@@ -1,0 +1,81 @@
+        <template>
+        <templatename>General Rule - Windows  </templatename>
+        <templatetype>event</templatetype>
+        <active>true</active>
+        <filename></filename>
+        <subject> ${RuleName} Security Alert </subject>
+                <body>
+                **********************************************************
+                [Rule Name]  ${RuleName}
+                [Category]:     ${Category}
+                [Event Name]:         ${EventName}
+                [Event Description]:   ${EventDescription}
+                **********************************************************
+                [Offense Time]  ${StartTime}
+                **********************************************************
+                [Rule Description]  ${EventDescription}
+                [Log Source Name]:  ${LogSourceName}
+                **********************************************************
+                [Action Performed by]:  ${UserName}
+                [Group Changed] : ${body.CustomProperty("Group Name")}
+                [Targeted User] : ${body.CustomProperty("Member Security ID")}
+                **********************************************************
+                [Log Source Name]:      ${LogSourceName}
+                [Payload]:
+                ${Payload}
+                </body>
+        </template>
+<template>
+        <templatename>General Rule - Offense  </templatename>
+        <templatetype>event</templatetype>
+        <active>true</active>
+        <filename></filename>
+        <subject> ${RuleName} Security Alert </subject>
+        <body>
+                        **********************************************************
+                        [Rule Name]  ${RuleName}
+                        [Category]:     ${Category}
+                        [Event Name]:         ${EventName}
+                        [Event Description]:   ${EventDescription}
+                        **********************************************************
+                        [Offense Time]  ${StartTime}
+                        **********************************************************
+                        [Rule Description]  ${EventDescription}
+                        [Log Source Name]:  ${LogSourceName}
+                        **********************************************************
+                        [Action Performed by]:  ${UserName}
+                        **********************************************************
+                        [Source Port]: ${SourcePort}
+                        [Source ip]:   ${SourceIP}
+                        [Source Network]: ${SourceNetwork}
+                        **********************************************************
+                        [Destination Port]:  ${DestinationPort}
+                        [Destination IP]:  ${DestinationIP}
+                        [Destination Network]:  ${DestinationNetwork}
+                        **********************************************************
+                        [Log Source Name]:      ${LogSourceName}
+                        [Payload]:
+                        ${Payload}
+
+        </body>
+</template>
+        <template>
+        <templatename>General Rule - Windows - AD - Changes  </templatename>
+        <templatetype>event</templatetype>
+        <active>true</active>
+        <filename></filename>
+        <subject> ${Category} </subject>
+                <body>
+        [Event Description]:   ${EventDescription}
+        [Group Changed] : ${body.CustomProperty("Group Name")}
+        [Targeted User] : ${body.CustomProperty("Member Security ID")}
+        [User Principal Name] : ${body.CustomProperty("User Principal Name")}
+        [Action Performed by]:  ${UserName}
+        [Offense Time]  ${StartTime}
+        [Rule Description]  ${EventDescription}
+        [Log Source Name]:  ${LogSourceName}
+
+
+                                </body>
+        </template>
+</templates>

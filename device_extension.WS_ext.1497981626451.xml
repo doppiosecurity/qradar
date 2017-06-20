@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:device-extension xmlns:ns2="event_parsing/device_extension">
+    <pattern id="allEventNames">(.*)</pattern>
+    <pattern id="SRC">src=(\d{1,3}\.\d{1,3}\.\d{1,3}.\d{1,3})</pattern>
+    <pattern id="DST">dst=(\d{1,3}\.\d{1,3}\.\d{1,3}.\d{1,3})</pattern>
+    <pattern id="DSTPRT">dpt=(\d{1,5})</pattern>
+    <pattern id="UNAME">suid=(.*?)\@</pattern>
+    <pattern id="DISPO">WebsenseLogfileDisposition=(\d{1,2})</pattern>
+    <pattern id="HOST1">WebsenseLogfileRemoteHost=(.*?)\:</pattern>
+    <pattern id="HOST2">WebsenseLogfileRemoteHost=(.*?)\s</pattern>
+    <pattern id="time">rt=(\d{2}\s\d{2}\s\d{4}\s\d{2}\:\d{2}\:\d{2})\&quot;</pattern>
+    <match-group description="Log Source Extension" order="1">
+        <matcher order="1" capture-group="1" pattern-id="DISPO" field="EventName"/>
+        <matcher order="1" enable-substitutions="false" capture-group="1" pattern-id="HOST1" field="HostName"/>
+        <matcher order="2" enable-substitutions="false" capture-group="1" pattern-id="HOST2" field="HostName"/>
+        <matcher order="1" capture-group="1" pattern-id="UNAME" field="UserName"/>
+        <matcher order="1" capture-group="1" pattern-id="SRC" field="SourceIp"/>
+        <matcher order="1" capture-group="1" pattern-id="DST" field="DestinationIp"/>
+        <matcher order="1" capture-group="1" pattern-id="DSTPRT" field="DestinationPort"/>
+        <matcher ext-data="MM-dd-YY hh:mm:ss" order="1" capture-group="1" pattern-id="time" field="DeviceTime"/>
+        <event-match-multiple device-event-category="unknown" capture-group-index="1" pattern-id="allEventNames"/>
+    </match-group>
+</ns2:device-extension>

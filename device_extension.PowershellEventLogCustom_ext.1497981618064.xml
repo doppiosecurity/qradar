@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:device-extension xmlns:ns2="event_parsing/device_extension">
+    <pattern id="EventCategory-Pattern-1">EventCategory=([0-9]{5})</pattern>
+    <pattern id="EventName-Pattern-1">EventID=([0-9]{4})</pattern>
+    <pattern id="HostName-Pattern-1">Computer=([^\s]+)</pattern>
+    <pattern id="SourceIp-Pattern-1">OriginatingComputer=([^\s]+)</pattern>
+    <pattern id="UserName-Pattern-1">User=([^\s]+)</pattern>
+    <match-group device-type-id-override="4006" order="1">
+        <matcher order="1" enable-substitutions="true" capture-group="\1" pattern-id="EventCategory-Pattern-1" field="EventCategory"/>
+        <matcher order="1" enable-substitutions="true" capture-group="\1" pattern-id="EventName-Pattern-1" field="EventName"/>
+        <matcher order="1" enable-substitutions="true" capture-group="\1" pattern-id="HostName-Pattern-1" field="HostName"/>
+        <matcher order="1" enable-substitutions="true" capture-group="\1" pattern-id="SourceIp-Pattern-1" field="SourceIp"/>
+        <matcher order="1" enable-substitutions="true" capture-group="\1" pattern-id="UserName-Pattern-1" field="UserName"/>
+        <event-match-multiple force-qidmap-lookup-on-fixup="true" send-identity="UseDSMResults" pattern-id="EventName-Pattern-1"/>
+    </match-group>
+</ns2:device-extension>
